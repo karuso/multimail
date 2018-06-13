@@ -235,9 +235,10 @@ class SendMails(object):
 
     def print_progress(self, out=sys.stdout):
         """Print the status of the job."""
-        out.write("\r%d%% job completed... (%d errors)"
-            % (self.step*100/self.total, self.errors))
-        out.flush()
+        pass
+        # out.write("\r%d%% job completed... (%d errors)"
+        #     % (self.step*100/self.total, self.errors))
+        # out.flush()
 
     def quit(self):
         self.connection.quit()
@@ -274,7 +275,8 @@ def main(args):
             % (cfg_path, str(e)))
     for file in opts.from_file:
         with open(file) as f:
-            opts.recipients.extend(list(addr.strip() for addr in f))
+            opts.recipients = list(addr.strip() for addr in f)
+            # opts.recipients.extend(list(addr.strip() for addr in f))
     if not opts.recipients:
         parser.error("No recipient found")
     if not opts.sender_addr:
